@@ -89,26 +89,42 @@ The chatbot retrieves relevant chunks from FAISS and generates answers using `gp
 
 ## **How to Run the Project**
 
-### **1. Install dependencies**
+### **1. Create the python virtual environment**
+```
+python -m venv env
+```
+
+### **2. Activate the python virtual environment**
+##### For windows OS
+```
+env\Scripts\Activate
+```
+
+##### For Linux/Mac OS
+```
+source env/bin/activate
+```
+
+### **3. Install dependencies**
 ```
 pip install -r requirements.txt
 ```
 
-### **2. Add your OpenAI API key**
+### **4. Add your OpenAI API key**
 Create a `.env` file:
 
 ```
 OPEN_API_KEY=your_key_here
 ```
 
-### **3. Place PDFs**
+### **5. Place PDFs**
 Put your PDF(s) inside:
 
 ```
 input_pdf/
 ```
 
-### **4. Run Part A & B (Extraction + Chunking)**
+### **6. Run Part A & B (Extraction + Chunking)**
 
 ```
 python extract_and_chunk.py --input_folder ./input_pdf --output_folder ./output
@@ -120,7 +136,7 @@ This generates:
 - `output/chunks/`
 - `output/chunks.db`
 
-### **5. Run Part C, D, E (Vector Store + Chatbot)**
+### **7. Run Part C, D, E (Vector Store + Chatbot)**
 
 ```
 python conversation_chain.py
