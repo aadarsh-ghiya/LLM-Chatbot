@@ -2,12 +2,11 @@ import os
 import argparse
 import json
 import sqlite3
+import pdfplumber
+
+from tqdm import tqdm
 from pathlib import Path
 from typing import List, Tuple
-
-import pdfplumber
-from tqdm import tqdm
-
 from langchain_text_splitters import CharacterTextSplitter
 
 def list_pdfs(folder: str) -> List[str]:
