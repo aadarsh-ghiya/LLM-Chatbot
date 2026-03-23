@@ -20,6 +20,10 @@ Custom Q&A Chatbot/
 │
 ├── extract_and_chunk.py    # Part A & B
 ├── conversation_chain.py   # Part C, D & E
+├── web_app.py              # Simple Flask web interface
+├── templates/              # HTML for the web app
+├── static/                 # CSS and JavaScript for the web app
+├── web_data/               # Auto-generated upload/session data
 ├── requirements.txt
 ├── .env                    # Place your OPEN_API_KEY
 └── README.md
@@ -87,6 +91,16 @@ The chatbot retrieves relevant chunks from FAISS and generates answers using `gp
 
 ---
 
+## **Part 4 - Web Interface Design**
+
+The web interface provides:
+
+- PDF upload for one or more files
+- Background analysis with status updates
+- A chat window for asking questions about the indexed PDFs
+
+---
+
 ## **How to Run the Project**
 
 ### **1. Create the python virtual environment**
@@ -116,6 +130,8 @@ Create a `.env` file:
 ```
 OPEN_API_KEY=your_key_here
 ```
+
+`OPENAI_API_KEY=your_key_here` also works.
 
 ### **5. Place PDFs**
 Put your PDF(s) inside:
@@ -153,5 +169,25 @@ Now you can ask questions like:
 - “What topics does this PDF cover”
 - “Explain harmonic balance simulation”
 - “Summarize the section on RF system design”
+
+---
+
+### **8. Run Part 4 (Web Interface)**
+
+```
+python web_app.py
+```
+
+Then open:
+
+```
+http://127.0.0.1:5050
+```
+
+From the web interface you can:
+
+- Upload one or more PDFs
+- Watch the indexing status update automatically
+- Ask questions after the PDFs are ready
 
 ---

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css', v='20260322e') }}">
+</head>
+<body>
+    <main class="container">
+        <header class="page-header">
+            <h1>PDF Chatbot</h1>
+            <p>Upload a PDF, wait for one analysis request to finish, then ask questions about the file.</p>
+        </header>
+
+        <section class="panel">
+            <div class="panel-header">
+                <h2>Upload</h2>
+                <span id="status-badge" class="badge">Idle</span>
+            </div>
+
+            <form id="upload-form" class="stack">
+                <input id="pdf-input" name="pdfs" type="file" accept=".pdf" multiple>
+                <button id="upload-button" type="submit" disabled>Analyze PDFs</button>
+            </form>
+
+            <div class="subsection">
+                <h3>Selected Files</h3>
+                <ul id="selected-file-list" class="list">
+                    <li>No files selected.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-header">
+                <h2>Status</h2>
+                <span id="updated-at" class="muted">Not indexed yet</span>
+            </div>
+
+            <p id="status-copy" class="status-text">Upload one or more PDFs to start building the knowledge base.</p>
+
+            <div class="stats">
+                <div class="stat-box">
+                    <span class="stat-label">PDFs</span>
+                    <strong id="pdf-count">0</strong>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">Chunks</span>
+                    <strong id="chunk-count">0</strong>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Indexed Files</h3>
+                <ul id="file-list" class="list">
+                    <li>No PDFs indexed yet.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="panel chat-panel">
+            <div class="panel-header">
+                <h2>Chat</h2>
+                <span id="chat-status" class="muted">Chat is locked until indexing is complete</span>
+            </div>
+
+            <section id="chat-history" class="chat-history" aria-live="polite">
+                <article class="empty-state">
+                    Upload a PDF and wait for the status to become ready.
+                </article>
+            </section>
+
+            <form id="chat-form" class="stack">
+                <textarea
+                    id="message-input"
+                    name="message"
+                    rows="3"
+                    placeholder="Ask a question about the uploaded PDFs..."
+                    disabled
+                ></textarea>
+                <button id="send-button" type="submit" disabled>Send</button>
+            </form>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='app.js', v='20260322e') }}" defer></script>
+</body>
+</html>

@@ -2,18 +2,17 @@ import os
 import argparse
 import json
 import sqlite3
-import pdfplumber
 
-from tqdm import tqdm
 from pathlib import Path
 from typing import List, Tuple
-from langchain_text_splitters import CharacterTextSplitter
 
 def list_pdfs(folder: str) -> List[str]:
     p = Path(folder)
     return sorted([str(x) for x in p.glob("**/*.pdf")])
 
 def extract_text_from_pdf(pdf_path: str) -> str:
+    import pdfplumber
+
     texts = []
     with pdfplumber.open(pdf_path) as pdf:
         for page in pdf.pages:
@@ -29,6 +28,8 @@ def clean_text(raw: str) -> str:
     return text.strip()
 
 def split_into_chunks(text: str, chunk_size: int = 500, chunk_overlap: int = 50, separators: List[str] = None) -> List[str]:
+    from langchain_text_splitters import CharacterTextSplitter
+
     if separators is None:
         separators = ["\n\n", "\n", " ", ""]
 
@@ -82,6 +83,8 @@ def process_pdfs(
     chunk_overlap: int = 50,
     persist_sqlite: bool = True
 ) -> Tuple[int, int]:
+    from tqdm import tqdm
+
     pdf_paths = list_pdfs(input_folder)
     if not pdf_paths:
         print(f"No PDFs found in {input_folder}")

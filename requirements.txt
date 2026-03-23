@@ -1,6 +1,7 @@
 pdfplumber
 tqdm
 python-dotenv
+Flask
 
 openai
 langchain
